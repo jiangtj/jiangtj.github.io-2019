@@ -35,7 +35,7 @@
 	input[type="button"],
 	.button {
 		position: relative;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("static/js/ie/PIE.htc");
 	}
 
 		input[type="submit"].alt,
@@ -54,7 +54,7 @@
 	textarea {
 		position: relative;
 		border: solid 1px #cccccc;
-		-ms-behavior: url("assets/js/ie/PIE.htc");
+		-ms-behavior: url("static/js/ie/PIE.htc");
 	}
 
 /* Image */
@@ -78,10 +78,10 @@
 /* Header */
 
 	#header {
-		background-image: url("../../images/header.jpg") !important;
+		background-image: url("../../static/images//header.jpg") !important;
 		background-size: cover !important;
 		background-position: scroll !important;
-		-ms-behavior: url("assets/js/ie/backgroundsize.min.htc");
+		-ms-behavior: url("static/js/ie/backgroundsize.min.htc");
 		padding: 8em 0 !important;
 		color: #ffffff;
 	}
@@ -108,7 +108,7 @@
 		}
 
 		#header .logo {
-			-ms-behavior: url("assets/js/ie/PIE.htc");
+			-ms-behavior: url("static/js/ie/PIE.htc");
 		}
 
 /* Footer */
