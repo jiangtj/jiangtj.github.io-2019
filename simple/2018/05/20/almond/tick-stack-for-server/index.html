@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>TICK Stack 实践之监控服务器 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TICK Stack是由一系列的服务组成的监控分析处理数据的解决方案，一般用于系统监控，或者收集处理与时间紧密相关的数据。     它包含了以下服务：     Telegraf 是一个插件驱动的代理服务，用于收集并提供系统数据（如CPU、内存等） InfluxDB 是一个时序数据库，为满足高负载的读写而开发的数据库 Chronograf 通过图表可视化分析数据的服务 Kapacitor 是数据处理">
+<meta name="keywords" content="TICK Stack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TICK Stack 实践之监控服务器">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/05/20/almond/tick-stack-for-server/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="TICK Stack是由一系列的服务组成的监控分析处理数据的解决方案，一般用于系统监控，或者收集处理与时间紧密相关的数据。     它包含了以下服务：     Telegraf 是一个插件驱动的代理服务，用于收集并提供系统数据（如CPU、内存等） InfluxDB 是一个时序数据库，为满足高负载的读写而开发的数据库 Chronograf 通过图表可视化分析数据的服务 Kapacitor 是数据处理">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-02T05:59:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TICK Stack 实践之监控服务器">
+<meta name="twitter:description" content="TICK Stack是由一系列的服务组成的监控分析处理数据的解决方案，一般用于系统监控，或者收集处理与时间紧密相关的数据。     它包含了以下服务：     Telegraf 是一个插件驱动的代理服务，用于收集并提供系统数据（如CPU、内存等） InfluxDB 是一个时序数据库，为满足高负载的读写而开发的数据库 Chronograf 通过图表可视化分析数据的服务 Kapacitor 是数据处理">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/tick-stack-for-server" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/05/20/almond/tick-stack-for-server/">
+    	TICK Stack 实践之监控服务器
+    </a>
+  </h2>
+	<time>
+	  5月 21, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p><a href="https://www.influxdata.com/time-series-platform/" target="_blank" rel="noopener">TICK Stack</a>是由一系列的服务组成的监控分析处理数据的解决方案，一般用于系统监控，或者收集处理与时间紧密相关的数据。    </p>
+<p>它包含了以下服务：   </p>
+<ul>
+<li>Telegraf 是一个插件驱动的代理服务，用于收集并提供系统数据（如CPU、内存等）</li>
+<li>InfluxDB 是一个时序数据库，为满足高负载的读写而开发的数据库</li>
+<li>Chronograf 通过图表可视化分析数据的服务</li>
+<li>Kapacitor 是数据处理服务，用于批处理数据以及必要时提醒用户等</li>
+</ul>
+<a id="more"></a>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>TICK在官网<a href="https://portal.influxdata.com/downloads" target="_blank" rel="noopener">https://portal.influxdata.com/downloads</a>提供相应的下载安装方式，注意需要翻墙（JQuery引用的是Google源，会导致页面点击无反应）<br>下面是Ubuntu &amp; Debian的安装方式<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># telegraf</span></span><br><span class="line">wget https://dl.influxdata.com/telegraf/releases/telegraf_1.6.2-1_amd64.deb</span><br><span class="line">sudo dpkg -i telegraf_1.6.2-1_amd64.deb</span><br><span class="line"><span class="comment"># influxdb</span></span><br><span class="line">wget https://dl.influxdata.com/influxdb/releases/influxdb_1.5.2_amd64.deb</span><br><span class="line">sudo dpkg -i influxdb_1.5.2_amd64.deb</span><br><span class="line"><span class="comment"># chronograf</span></span><br><span class="line">wget https://dl.influxdata.com/chronograf/releases/chronograf_1.4.4.2_amd64.deb</span><br><span class="line">sudo dpkg -i chronograf_1.4.4.2_amd64.deb</span><br><span class="line"><span class="comment"># kapacitor</span></span><br><span class="line">wget https://dl.influxdata.com/kapacitor/releases/kapacitor_1.4.1_amd64.deb</span><br><span class="line">sudo dpkg -i kapacitor_1.4.1_amd64.deb</span><br></pre></td></tr></table></figure></p>
+<p>也可以通过添加apt源安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -</span><br><span class="line"><span class="built_in">source</span> /etc/lsb-release</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"deb https://repos.influxdata.com/<span class="variable">$&#123;DISTRIB_ID,,&#125;</span> <span class="variable">$&#123;DISTRIB_CODENAME&#125;</span> stable"</span> | sudo tee /etc/apt/sources.list.d/influxdb.list</span><br><span class="line">sudo apt-get update </span><br><span class="line">sudo apt-get install influxdb</span><br><span class="line">sudo apt-get install telegraf</span><br><span class="line">sudo apt-get install chronograf</span><br><span class="line">sudo apt-get install kapacitor</span><br></pre></td></tr></table></figure></p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>通过linux命令启动相应的服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo service telegraf start</span><br><span class="line">sudo service influxd start</span><br><span class="line">sudo service kapacitor start</span><br><span class="line">sudo service chronograf start</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下，访问<a href="http://chronograf-ip:8888" target="_blank" rel="noopener">http://chronograf-ip:8888</a>即可    </p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>一般情况下需要调整配置文件，使服务满足我们的需求，如权限等。<br>可以查看官方相关的文档配置    </p>
+<ul>
+<li><a href="https://docs.influxdata.com/chronograf/v1.4/introduction/getting-started/" target="_blank" rel="noopener">chronograf</a>   </li>
+<li><a href="https://docs.influxdata.com/influxdb/v1.5/" target="_blank" rel="noopener">influxdb</a>    </li>
+</ul>
+<p>目前Chronograf 的权限支持github,google等账号体系，但企业内部使用可能需要重新开发，满足企业内部帐号权限系统  </p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>事实上，监控的功能挺多余的，云服务商一般都为我们提供了不错的监控服务。但influxdb，目前来说最主流的时序数据库，可以用来存储其他一些数据。例如网站的访问量等。再通过chronograf展示数据，在<a href="https://jiangtj.gitlab.io/">我的博客</a>的左侧菜单上有站点数据，就是通过这种方式来实现的，<a href="https://gitlab.com/JiangTJ/jiangtj.gitlab.io/blob/master/source/_data/metric.swig" target="_blank" rel="noopener">我统计用的js脚本可以点这里看</a>。   </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://blog.csdn.net/lin_credible/article/details/60579738" target="_blank" rel="noopener">TICK技术栈 – DevOps轻量级监控解决方案</a>  </li>
+<li><a href="https://www.influxdata.com/time-series-platform/" target="_blank" rel="noopener">Open Source Time Series Platform</a>  </li>
+</ul>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/TICK-Stack/">TICK Stack</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

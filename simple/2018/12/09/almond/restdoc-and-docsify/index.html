@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Restdoc与Docsify,更简单的生成Api文档 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大半年前就写过一篇文章《测试驱动开发(TDD)的实践》，关于测试的。时至今日，我仍然坚信测试是软件开发一重要环节，它在绝大多数情况下，保障了系统的质量与稳定性。    但当时所搭的框架存在一些不足，当然主要是由于Asciidoctor。这是一个足够完善的标记语言，但也足够复杂。然而大多数情况下我们并不需要这些语法，Markdown正好足够。     事实上，当时我最先尝试的也是Markdown，使">
+<meta name="keywords" content="Test">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Restdoc与Docsify,更简单的生成Api文档">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/12/09/almond/restdoc-and-docsify/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="大半年前就写过一篇文章《测试驱动开发(TDD)的实践》，关于测试的。时至今日，我仍然坚信测试是软件开发一重要环节，它在绝大多数情况下，保障了系统的质量与稳定性。    但当时所搭的框架存在一些不足，当然主要是由于Asciidoctor。这是一个足够完善的标记语言，但也足够复杂。然而大多数情况下我们并不需要这些语法，Markdown正好足够。     事实上，当时我最先尝试的也是Markdown，使">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-10T05:13:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Restdoc与Docsify,更简单的生成Api文档">
+<meta name="twitter:description" content="大半年前就写过一篇文章《测试驱动开发(TDD)的实践》，关于测试的。时至今日，我仍然坚信测试是软件开发一重要环节，它在绝大多数情况下，保障了系统的质量与稳定性。    但当时所搭的框架存在一些不足，当然主要是由于Asciidoctor。这是一个足够完善的标记语言，但也足够复杂。然而大多数情况下我们并不需要这些语法，Markdown正好足够。     事实上，当时我最先尝试的也是Markdown，使">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/restdoc-and-docsify" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/12/09/almond/restdoc-and-docsify/">
+    	Restdoc与Docsify,更简单的生成Api文档
+    </a>
+  </h2>
+	<time>
+	  12月 10, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>大半年前就写过一篇文章<a href="https://jiangtj.gitlab.io/articles/almond/test-driven development/">《测试驱动开发(TDD)的实践》</a>，关于测试的。时至今日，我仍然坚信测试是软件开发一重要环节，它在绝大多数情况下，保障了系统的质量与稳定性。   </p>
+<p>但当时所搭的框架存在一些不足，当然主要是由于Asciidoctor。这是一个足够完善的标记语言，但也足够复杂。然而大多数情况下我们并不需要这些语法，Markdown正好足够。    </p>
+<p>事实上，当时我最先尝试的也是Markdown，使用Spring Restdoc中推荐的Slate方案，来解决Markdown无法包含问题。缺点是它运行使用的Ruby，与我所学的完全不同（Java、Js）。但最近看到了另一个文档工具Docsify，它也添加了包含功能，它足够简单，以至于看几遍例子就完全学会，虽然也有缺点，SEO方面，但内部接口文档，你会在乎这个么？下面是一个例子整合Restdoc与Docsify</p>
+<a id="more"></a>
+<h1 id="创建服务"><a href="#创建服务" class="headerlink" title="创建服务"></a>创建服务</h1><p>首先，创建一个简单的Spring Boot服务，以及暴露一个用户接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestdocDocsifyApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(RestdocDocsifyApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Server is running!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">user</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="string">"Jone"</span>,<span class="number">1</span>,<span class="number">20</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建测试用例"><a href="#创建测试用例" class="headerlink" title="创建测试用例"></a>创建测试用例</h1><p>这个测试用例是集成测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line"><span class="meta">@AutoConfigureWebTestClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestdocDocsifyApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> WebTestClient webTestClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.webTestClient.get().uri(<span class="string">"/"</span>).accept(MediaType.APPLICATION_JSON)</span><br><span class="line">                .exchange()</span><br><span class="line">                .expectStatus().isOk()</span><br><span class="line">                .expectBody(String.class)</span><br><span class="line">                .isEqualTo(<span class="string">"Server is running!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.webTestClient.get().uri(<span class="string">"/user"</span>).accept(MediaType.APPLICATION_JSON)</span><br><span class="line">                .exchange()</span><br><span class="line">                .expectStatus().isOk()</span><br><span class="line">                .expectBody();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="整合Restdoc"><a href="#整合Restdoc" class="headerlink" title="整合Restdoc"></a>整合Restdoc</h1><ol>
+<li>添加自动配置注解<code>@AutoConfigureRestDocs</code></li>
+<li>为每个WebTestClient添加文档参数说明<code>.consumeWith(document())</code><br>整合之后的结果如下</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line"><span class="meta">@AutoConfigureWebTestClient</span></span><br><span class="line"><span class="meta">@AutoConfigureRestDocs</span>(outputDir = <span class="string">"docs/snippets"</span>)</span><br><span class="line"><span class="meta">@Import</span>(CustomRestDocsConfiguration.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestdocDocsifyApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> WebTestClient webTestClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.webTestClient.get().uri(<span class="string">"/user"</span>).accept(MediaType.APPLICATION_JSON)</span><br><span class="line">                .exchange()</span><br><span class="line">                .expectStatus().isOk()</span><br><span class="line">                .expectBody()</span><br><span class="line">                .consumeWith(document(<span class="string">"user"</span>,responseFields(</span><br><span class="line">                        fieldWithPath(<span class="string">"name"</span>).description(<span class="string">"The user's name"</span>),</span><br><span class="line">                        fieldWithPath(<span class="string">"sex"</span>).description(<span class="string">"The user's sex"</span>),</span><br><span class="line">                        fieldWithPath(<span class="string">"age"</span>).description(<span class="string">"The user's age"</span>))</span><br><span class="line">                ));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>outputDir</code>定义输出目录，指向Docsify文档目录，方便部署（注意添加Git忽略配置），<code>@Import(CustomRestDocsConfiguration.class)</code>导入自定义配置，目的是修改模板为Markdown，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TestConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomRestDocsConfiguration</span> <span class="keyword">implements</span> <span class="title">RestDocsWebTestClientConfigurationCustomizer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(WebTestClientRestDocumentationConfigurer configurer)</span> </span>&#123;</span><br><span class="line">        configurer.snippets().withTemplateFormat(TemplateFormats.markdown());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="创建Docsify文件"><a href="#创建Docsify文件" class="headerlink" title="创建Docsify文件"></a>创建Docsify文件</h1><p>Docsify的一些入门，可以查看<a href="https://docsify.js.org/#/zh-cn/quickstart" target="_blank" rel="noopener">官网</a>，这里已经当你会基本的操作了。首先创建一个<code>index.html</code>，您可以使用命令行生成，或者直接Copy下面的代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Spring-Cloud Docs<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"Description"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//unpkg.com/docsify/lib/themes/vue.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    window.$docsify = &#123;</span></span><br><span class="line"><span class="undefined">        name: 'Restdoc-Docsify Examples',</span></span><br><span class="line"><span class="undefined">        repo: 'JiangTJ/restdoc-docsify',</span></span><br><span class="line"><span class="undefined">        loadSidebar: true,</span></span><br><span class="line"><span class="undefined">        autoHeader: true,</span></span><br><span class="line"><span class="undefined">        auto2top: true,</span></span><br><span class="line"><span class="undefined">        subMaxLevel: 2</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/docsify/lib/docsify.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/docsify/lib/plugins/search.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/prismjs/components/prism-java.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/prismjs/components/prism-bash.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//unpkg.com/prismjs/components/prism-http.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>你可以调整<code>window.$docsify</code>参数，这里将<code>loadSidebar</code>置为了<code>true</code>，为的是每个需求服务分在不同的文件里<br>同样的需要为其添加主页<code>README.md</code>和侧边栏<code>_sidebar.md</code>  </p>
+<ul>
+<li><p>README.md</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># Welcome Page</span></span><br><span class="line"></span><br><span class="line"><span class="section">## How to use</span></span><br><span class="line">mvn test</span><br><span class="line">docsify serve docs</span><br><span class="line">browse <span class="code">`localhost:3000`</span>   </span><br><span class="line">click sidebar <span class="code">`User Api`</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>_sidebar.md</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>[<span class="string">User Api</span>](<span class="link">user.md</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>编写一个用户服务，使用文档嵌入，将代码片段包括进去</p>
+<ul>
+<li>user.md<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### curl-request</span></span><br><span class="line">[<span class="string">curl-request</span>](<span class="link">snippets/user/curl-request.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### http-request</span></span><br><span class="line">[<span class="string">http-request</span>](<span class="link">snippets/user/http-request.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### http-response</span></span><br><span class="line">[<span class="string">http-response</span>](<span class="link">snippets/user/http-response.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### httpie-request</span></span><br><span class="line">[<span class="string">httpie-request</span>](<span class="link">snippets/user/httpie-request.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### request-body</span></span><br><span class="line">[<span class="string">request-body</span>](<span class="link">snippets/user/request-body.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### response-body</span></span><br><span class="line">[<span class="string">response-body</span>](<span class="link">snippets/user/response-body.md ':include'</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">### response-fields</span></span><br><span class="line">[<span class="string">response-fields</span>](<span class="link">snippets/user/response-fields.md ':include'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><ol>
+<li>运行maven测试<code>mvn test</code>生成代码片段   </li>
+<li>执行命令行<code>docsify serve docs</code>，浏览器打开<code>localhost:3000</code>就可以预览刚才编写的文档了(事实上该命令只是将docs下的文件直接放置在web服务器中，如果使用CI可以很方便的部署该文档服务)</li>
+</ol>
+<h1 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h1><p>Docsify足够简单，Restdoc在测试阶段生成文档的方式既校验了代码，又校验文档，这种方式还有什么不足呢？在以下两方面</p>
+<ul>
+<li>无法很好的生成pdf文件</li>
+<li>Mock接口</li>
+</ul>
+<p>如果你所在的公司非常“传统”，对于doc或者pdf之类的文件很执着，那Asciidoctor更适合您，多学一门语言而已，但Asciidoctor生成的pdf是真的漂亮。另外一个Mock接口，是为了在完成前，前端可以直接调用Mock接口进行调试，这是一个很好的实践，具体如何做到，你可以尝试一下，方式应该是多种多样的</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://github.com/JiangTJ/restdoc-docsify" target="_blank" rel="noopener">该文档的例子工程</a></li>
+<li><a href="https://docs.spring.io/spring-boot/docs/2.1.1.RELEASE/reference/htmlsingle/#boot-features-testing" target="_blank" rel="noopener">Spring Boot文档</a></li>
+<li><a href="https://docs.spring.io/spring-restdocs/docs/2.0.2.RELEASE/reference/html5/" target="_blank" rel="noopener">Spring Restdoc文档</a></li>
+<li><a href="https://docsify.js.org/#/" target="_blank" rel="noopener">Docsify文档</a></li>
+</ul>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/Test/">Test</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

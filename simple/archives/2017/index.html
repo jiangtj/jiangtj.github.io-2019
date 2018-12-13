@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Archives: 2017 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Kurome">
+<meta property="og:url" content="https://jiangtj.gitlab.io/archives/2017/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kurome">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      
+	
+
+
+	<section class="page-header archive">
+    <h1>- <span>2017</span> -</h1>
+  </section>
+
+
+
+
+<section class="post-list">
+	
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/11/30/almond/mysql-in-and-exists/">
+      MySQL5.7 IN与EXISTS
+    </a>
+  </h2>
+  
+  <time>
+    12月 1, 2017
+  </time>
+  <section class="content">
+	  <blockquote>
+<p>文章中的表参考这里的创建<a href="http://blog.csdn.net/stevendbaguo/article/details/73467649" target="_blank" rel="noopener">http://blog.csdn.net/stevendbaguo/article/details/73467649</a></p>
+</blockquote>
+<h3 id="数据表的创建"><a href="#数据表的创建" class="headerlink" title="数据表的创建"></a>数据表的创建</h3><ul>
+<li>制造数据<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="keyword">test</span>; </span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">test</span>( </span><br><span class="line">    <span class="keyword">ID</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">    <span class="string">`Name`</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>, </span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>( <span class="keyword">ID</span> ) </span><br><span class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">INNODB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span> utf8;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/11/30/almond/mysql-in-and-exists/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/MySQL/">MySQL</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/10/10/almond/gitlab-pages-for-hexo/">
+      GitLab Pages 搭建Hexo教程
+    </a>
+  </h2>
+  
+  <time>
+    10月 11, 2017
+  </time>
+  <section class="content">
+	  <p>大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。    </p>
+<p>所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态资源将托管在gitlab-pages上。   </p>
+<blockquote>
+<p>There is also a tutorial in English</p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/10/10/almond/gitlab-pages-for-hexo/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Hexo/">Hexo</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/10/07/almond/dart-get-start/">
+      Dart之环境搭建
+    </a>
+  </h2>
+  
+  <time>
+    10月 8, 2017
+  </time>
+  <section class="content">
+	  <p>Dart 是一种易学习、易扩展、跨平台的编程语言。   </p>
+<ul>
+<li>易学习：语法感觉很熟悉，语义是干净和一致的。是Java与Javascript的结合体。</li>
+<li>易扩展：仅谷歌就有超过200万行的生产Dart代码。应用程序可以达到数十万行代码。</li>
+<li>跨平台：Dart可以在每一个现代浏览器、命令行、服务器和移动设备上快速运行。</li>
+</ul>
+<p>Google 在大型项目中部署使用 Dart。例如，下一代的AdWords (谷歌最重要的赚钱应用)运行在Dart上。   </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/10/07/almond/dart-get-start/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Dart/">Dart</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/09/16/almond/Java ProjectReactor-Flux/">
+      Java ProjectReactor框架之Flux篇
+    </a>
+  </h2>
+  
+  <time>
+    9月 17, 2017
+  </time>
+  <section class="content">
+	  <p>Spring5现处在第四个预发布版，正式版将要发布了，它带来的一大特性就是响应式框架Spring WebFlux。默认使用ProjectReactor框架。因此。本文通过ProjectReactor中的Flux，来学习使用该框架，以及了解其传递的思想。   </p>
+<p>本文基于Reactor3.1 rc1    </p>
+<p>Reactor官方地址<a href="http://projectreactor.io/" target="_blank" rel="noopener">http://projectreactor.io/</a>，官方文档写的十分详细，如果您有不错的英文能力，建议直接阅读官方文档。  </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/09/16/almond/Java ProjectReactor-Flux/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Reactive/">Reactive</a><a class="tag-link" href="/simple/tags/Reactor/">Reactor</a><a class="tag-link" href="/simple/tags/WebFlux/">WebFlux</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/09/10/almond/Spring-data-jpa-and-Mybatis/">
+      Spring Data Jpa与Mybatis的选择
+    </a>
+  </h2>
+  
+  <time>
+    9月 11, 2017
+  </time>
+  <section class="content">
+	  <p>看了会jpa的文档，感觉挺不错的，如果都是增删改和简单查询，那基本就不用写sql，同时数据库也交由jpa管理，省心。<br>当然jpa也绝对不全是优点，当默认的规范生成sql不能满足我们的业务的时候。mybatis直接写sql更简单，更易实现。而且，我们也可以更好的调整sql以提升性能（sql的调优后，性能成倍提高的）。   </p>
+<blockquote>
+<p>那么，他们之间改怎么选择呢  </p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/09/10/almond/Spring-data-jpa-and-Mybatis/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Jpa/">Jpa</a><a class="tag-link" href="/simple/tags/Mybatis/">Mybatis</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/08/10/almond/shiro-filter-and-interceptor/">
+      Shiro拦截器与过滤器
+    </a>
+  </h2>
+  
+  <time>
+    8月 11, 2017
+  </time>
+  <section class="content">
+	  <blockquote>
+<p>这篇是对 <a href="http://www.iteye.com/blogs/subjects/shiro" target="_blank" rel="noopener">开涛的《跟我学shiro》</a> 的部分章节补充，更详细的探讨shiro的过滤器和拦截器</p>
+</blockquote>
+<h3 id="拦截器与过滤器定义"><a href="#拦截器与过滤器定义" class="headerlink" title="拦截器与过滤器定义"></a>拦截器与过滤器定义</h3><ul>
+<li>过滤器是一个程序，它先于与之相关的servlet或JSP页面运行在服务器上。它依赖于servlet容器。</li>
+<li>拦截器，在AOP（Aspect-Oriented Programming）中用于在某个方法或字段被访问之前，进行拦截然后在之前或之后加入某些操作。拦截是AOP的一种实现策略。</li>
+</ul>
+<p>在shiro中存在下图关系<br><img src="https://jiangtj.github.io/assets/img/others/shiro%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%8E%E6%8B%A6%E6%88%AA%E5%99%A8.PNG" alt="shiro"></p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/08/10/almond/shiro-filter-and-interceptor/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Shiro/">Shiro</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/08/09/almond/for friend, how working in java/">
+      写给我的朋友，Java学习之路
+    </a>
+  </h2>
+  
+  <time>
+    8月 10, 2017
+  </time>
+  <section class="content">
+	  <h3 id="最重要的"><a href="#最重要的" class="headerlink" title="最重要的"></a>最重要的</h3><p>选择程序猿，便意味着你始终要学习。如果说想着看完这里的全部，就能靠这混吃一辈子，那还是放弃把。<br>这里是我的曾今学习的方式，但我的学习方法可能不是很适合你。所以我只当只领路羊，接下来的学习，都得靠你自己。<br>加油！</p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/08/09/almond/for friend, how working in java/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/学习/">学习</a><a class="tag-link" href="/simple/tags/杂文/">杂文</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/08/08/almond/git-start/">
+      Git教程
+    </a>
+  </h2>
+  
+  <time>
+    8月 9, 2017
+  </time>
+  <section class="content">
+	  <p>先推荐三篇教程，帮助大家快速熟悉，最好按顺序学习~  </p>
+<h3 id="廖雪峰老师的git教程"><a href="#廖雪峰老师的git教程" class="headerlink" title="廖雪峰老师的git教程"></a>廖雪峰老师的git教程</h3><p>这篇教程，百度搜git教程第一篇就是，廖雪峰老师讲的很清楚，非常适合新人学习及了解概念   </p>
+<blockquote>
+<p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/</a></p>
+</blockquote>
+<h3 id="idea里git实战"><a href="#idea里git实战" class="headerlink" title="idea里git实战"></a>idea里git实战</h3><p>这篇讲idea中git的可视化操作。大部分时间，我们使用git都是可视化的，概念清楚的情况下，放心用   </p>
+<blockquote>
+<p><a href="http://blog.csdn.net/autfish/article/details/52513465" target="_blank" rel="noopener">http://blog.csdn.net/autfish/article/details/52513465</a></p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/08/08/almond/git-start/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Git/">Git</a><a class="tag-link" href="/simple/tags/学习/">学习</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+</section>
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

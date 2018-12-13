@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Tag: CI | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Kurome">
+<meta property="og:url" content="https://jiangtj.gitlab.io/tags/CI/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kurome">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      
+	<section class="page-header tag">
+    <h1>- <span>CI</span> -</h1>
+  </section>
+
+
+
+
+
+
+<section class="post-list">
+	
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/10/14/almond/hexo-theme-manage/">
+      简单、高效的管理hexo站点主题
+    </a>
+  </h2>
+  
+  <time>
+    10月 15, 2018
+  </time>
+  <section class="content">
+	  <p>如果您和我一样，喜欢更新至最新的主题，那么您也应该遇到和我一样的烦恼。每次更新新的主题时，总是要重新配置，而且随着自定义的内容增多，更新就成了负担。<br>因此，引入了Fork与Submodules来实现以下目标</p>
+<ol>
+<li>自动合并自定义内容与配置</li>
+<li>校验更新操作是否正常工作</li>
+</ol>
+<blockquote>
+<p>如果您不了解如何使用hexo搭建博客，您可以参考这篇博客：<a href="https://jiangtj.gitlab.io/articles/almond/gitlab-pages-for-hexo/">https://jiangtj.gitlab.io/articles/almond/gitlab-pages-for-hexo/</a></p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/10/14/almond/hexo-theme-manage/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Hexo/">Hexo</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/04/22/almond/spring-boot-autodeploy-with-gitlab/">
+      Spring Boot使用GitLab CI自动部署
+    </a>
+  </h2>
+  
+  <time>
+    4月 23, 2018
+  </time>
+  <section class="content">
+	  <h1 id="定义场景"><a href="#定义场景" class="headerlink" title="定义场景"></a>定义场景</h1><p>spring boot应用在手动部署过程中主要分为两步，打包编译与上传部署（也可能存在测试环境，但由于该项目目前只有我开发，并未写测试用例）。同样的在gitlab-ci文件中也定义相应的两步骤<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">build</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure></p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/04/22/almond/spring-boot-autodeploy-with-gitlab/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Java/">Java</a><a class="tag-link" href="/simple/tags/Shell/">Shell</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/04/19/almond/spring-boot-autorun-with-gitlab/">
+      Spring Boot 自动重启脚本
+    </a>
+  </h2>
+  
+  <time>
+    4月 20, 2018
+  </time>
+  <section class="content">
+	  <p>一个脚本，自动从GitLab上下载jar，同时重启服务。为后续的CI自动部署做准备<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#defined</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"通过GitLab-CI下载jar"</span></span><br><span class="line">wget -O bill-server.jar <span class="string">"https://gitlab.com/dream-room/bill-server/-/jobs/artifacts/<span class="variable">$1</span>/raw/target/bill-server.jar?job=release-build"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"查询已存在进程"</span></span><br><span class="line">pgrep -af bill-server</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"结束已存在进程"</span></span><br><span class="line">pkill -f bill-server</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行<span class="variable">$1</span>"</span></span><br><span class="line">nohup java -jar bill-server.jar &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"更新结束"</span></span><br></pre></td></tr></table></figure></p>
+<p>运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh bill-start.sh release-0.0.3</span><br></pre></td></tr></table></figure></p>
+
+
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Java/">Java</a><a class="tag-link" href="/simple/tags/Shell/">Shell</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2017/10/10/almond/gitlab-pages-for-hexo/">
+      GitLab Pages 搭建Hexo教程
+    </a>
+  </h2>
+  
+  <time>
+    10月 11, 2017
+  </time>
+  <section class="content">
+	  <p>大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。    </p>
+<p>所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态资源将托管在gitlab-pages上。   </p>
+<blockquote>
+<p>There is also a tutorial in English</p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2017/10/10/almond/gitlab-pages-for-hexo/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Hexo/">Hexo</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+</section>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

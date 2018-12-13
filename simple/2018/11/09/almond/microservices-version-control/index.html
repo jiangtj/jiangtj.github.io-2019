@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>微服务设计 - 版本控制 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景在微服务中，单个服务的升级改善是不可避免的，虽然改动最终引起Rest接口变动并不多，但仍然会出现。在《微服务设计》中，提供了两种处理方案：  不同的接口共存 同时运行多个版本服务  这本书的作者Sam Newman，他认为这两种方案都是可行的，但更倾向于不同接口共存。也提出了三点主要原因  当出现问题时，不同的接口共存可以更快的修改新老版本的代码并一同部署，而另一种就比较麻烦了 方案二维护困难">
+<meta name="keywords" content="Version Control,Design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务设计 - 版本控制">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/11/09/almond/microservices-version-control/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="背景在微服务中，单个服务的升级改善是不可避免的，虽然改动最终引起Rest接口变动并不多，但仍然会出现。在《微服务设计》中，提供了两种处理方案：  不同的接口共存 同时运行多个版本服务  这本书的作者Sam Newman，他认为这两种方案都是可行的，但更倾向于不同接口共存。也提出了三点主要原因  当出现问题时，不同的接口共存可以更快的修改新老版本的代码并一同部署，而另一种就比较麻烦了 方案二维护困难">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-10T04:09:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务设计 - 版本控制">
+<meta name="twitter:description" content="背景在微服务中，单个服务的升级改善是不可避免的，虽然改动最终引起Rest接口变动并不多，但仍然会出现。在《微服务设计》中，提供了两种处理方案：  不同的接口共存 同时运行多个版本服务  这本书的作者Sam Newman，他认为这两种方案都是可行的，但更倾向于不同接口共存。也提出了三点主要原因  当出现问题时，不同的接口共存可以更快的修改新老版本的代码并一同部署，而另一种就比较麻烦了 方案二维护困难">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/microservices-version-control" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/11/09/almond/microservices-version-control/">
+    	微服务设计 - 版本控制
+    </a>
+  </h2>
+	<time>
+	  11月 10, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在微服务中，单个服务的升级改善是不可避免的，虽然改动最终引起Rest接口变动并不多，但仍然会出现。在《微服务设计》中，提供了两种处理方案：</p>
+<ol>
+<li>不同的接口共存</li>
+<li>同时运行多个版本服务</li>
+</ol>
+<p>这本书的作者Sam Newman，他认为这两种方案都是可行的，但更倾向于不同接口共存。也提出了三点主要原因</p>
+<ul>
+<li>当出现问题时，不同的接口共存可以更快的修改新老版本的代码并一同部署，而另一种就比较麻烦了</li>
+<li>方案二维护困难，同时存在多个版本服务，对运维来说具有较大的挑战性</li>
+<li>持久化层可能是一样的，方案二却有不同版本的实现，会导致潜在的复杂性</li>
+</ul>
+<p>但我更倾向于方案二，该方案的实际使用者主要是Netflix（Spring Cloud便是基于他开源的微服务框架研发的），在现阶段（2018年）相对于作者的年代（2015年），技术上已经有了较大的变化。微服务的设计已经在很多公司大规模的推行及使用，变得更加成熟。作者所提出的前两点问题已经有了比较好的方案减少影响    </p>
+<a id="more"></a>
+<h1 id="问题修复"><a href="#问题修复" class="headerlink" title="问题修复"></a>问题修复</h1><p>首先，同时需要修改两服务的情况应当只有问题修复，新功能迭代，应发生在新服务上，老版本不应该支持（从某种程度上来说，可以启到督促用户升级）    </p>
+<p>那么问题如何修复呢？同样也存在多种情况，我们拿书中的例子（用户服务）接着讲    </p>
+<h2 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h2><p>用户服务负责的是用户相关的功能，其中一种情况是做了改进，增强部分功能。例如原本用户创建接口只是简单的用户名与单邮箱绑定（v1），改版后，需要实现的是多邮箱的绑定（v2），事情一个用户多个邮箱是比较常见的    </p>
+<p>那么在这种情况下，底层的持久层已经改变了，原本应该用户表中存在邮箱字段，而新方案则为用户表与用户邮箱绑定表。我们需要在老节点拉出分支<code>release-v1</code>用于维护与兼容老版本，同时在<code>master</code>上迭代新的改进，稳定后拉出<code>release-v2</code>，不同的版本的服务与具体的分支对应，同样的可以创建<code>release-v3</code>等，但不建议同时维护多个版本，即便在不同的接口共存方案里也是一样的    </p>
+<p>有了这些分支后，我们所做的修复都只需要在<code>master</code>上修复，通过<code>git cherry-pick</code>拉取单次提交至不同版本上，这是<code>GitLab Flow</code>方案，他所提倡的上游原则，在很大程度上避免了修改问题所造成的影响</p>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><p>这里说的重构是指代码的重写，可能用了不同的技术架构或者语音，那么在这种情况下，不同的接口共存方案将无法处理，因为您的服务发生了彻底的变化</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>问题修复后的部署也是难点，如果保证准确部署呢，CI/CD在很大程度上解决了这个问题，许多CI工具都提供指定分支的脚本配置，没错，我们可以提供一样的CI配置文件，保证编译测试一致的前提下，在不同的分支中运行不同的部署脚本</p>
+<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>运行时，如何将用户指向不同服务，同样的可以通过uri定位如<code>/v1/*</code>，微服务中网关与注册中心特别重要，我们可以在服务名中硬编码版本，比如<code>user-v1</code>这是第一个版本，在Spring Cloud中配置可以是：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    gateway:</span></span><br><span class="line"><span class="attr">      routes:</span></span><br><span class="line"><span class="attr">        - id:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">          uri:</span> <span class="attr">lb://user-v1</span></span><br><span class="line"><span class="attr">          predicates:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">Path=/v1/user/**</span></span><br><span class="line"><span class="attr">          filters:</span></span><br><span class="line">            <span class="comment"># Strip first path，such v1</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">StripPrefix=1</span></span><br></pre></td></tr></table></figure></p>
+<p>这并不困难</p>
+<h1 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h1><p>这个问题是唯一无法避免的，当然不同的接口共存也同样会遇到这个问题。作者认为旧接口转换处理后重新指向新接口服务，来避免持久化问题。这样的方案能解决的，在多服务中也很好解决，往往数据库中字段添加默认值就够了。其他无法兼容的，那么旧接口转换后访问新街口能不出错？唯一的措施是尽快推进升级    </p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>不同的接口共存就不存在问题么，显然不是的。每次新版本的发布，需要对所有接口重写，即使接口定义没有变化。这在很大程度上导致代码的冗余    </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li>《微服务设计》 Sam Newman 著 崔力强 张俊 译</li>
+<li><a href="https://docs.gitlab.com/ee/university/training/gitlab_flow.html" target="_blank" rel="noopener">GitLab Flow</a></li>
+</ul>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/Design/">Design</a><a class="tag-link" href="/simple/tags/Version-Control/">Version Control</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

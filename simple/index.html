@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Kurome">
+<meta property="og:url" content="https://jiangtj.gitlab.io/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kurome">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      
+
+
+
+
+
+<section class="post-list">
+	
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/12/09/almond/restdoc-and-docsify/">
+      Restdoc与Docsify,更简单的生成Api文档
+    </a>
+  </h2>
+  
+  <time>
+    12月 10, 2018
+  </time>
+  <section class="content">
+	  <p>大半年前就写过一篇文章<a href="https://jiangtj.gitlab.io/articles/almond/test-driven development/">《测试驱动开发(TDD)的实践》</a>，关于测试的。时至今日，我仍然坚信测试是软件开发一重要环节，它在绝大多数情况下，保障了系统的质量与稳定性。   </p>
+<p>但当时所搭的框架存在一些不足，当然主要是由于Asciidoctor。这是一个足够完善的标记语言，但也足够复杂。然而大多数情况下我们并不需要这些语法，Markdown正好足够。    </p>
+<p>事实上，当时我最先尝试的也是Markdown，使用Spring Restdoc中推荐的Slate方案，来解决Markdown无法包含问题。缺点是它运行使用的Ruby，与我所学的完全不同（Java、Js）。但最近看到了另一个文档工具Docsify，它也添加了包含功能，它足够简单，以至于看几遍例子就完全学会，虽然也有缺点，SEO方面，但内部接口文档，你会在乎这个么？下面是一个例子整合Restdoc与Docsify</p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/12/09/almond/restdoc-and-docsify/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Test/">Test</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/11/09/almond/microservices-version-control/">
+      微服务设计 - 版本控制
+    </a>
+  </h2>
+  
+  <time>
+    11月 10, 2018
+  </time>
+  <section class="content">
+	  <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在微服务中，单个服务的升级改善是不可避免的，虽然改动最终引起Rest接口变动并不多，但仍然会出现。在《微服务设计》中，提供了两种处理方案：</p>
+<ol>
+<li>不同的接口共存</li>
+<li>同时运行多个版本服务</li>
+</ol>
+<p>这本书的作者Sam Newman，他认为这两种方案都是可行的，但更倾向于不同接口共存。也提出了三点主要原因</p>
+<ul>
+<li>当出现问题时，不同的接口共存可以更快的修改新老版本的代码并一同部署，而另一种就比较麻烦了</li>
+<li>方案二维护困难，同时存在多个版本服务，对运维来说具有较大的挑战性</li>
+<li>持久化层可能是一样的，方案二却有不同版本的实现，会导致潜在的复杂性</li>
+</ul>
+<p>但我更倾向于方案二，该方案的实际使用者主要是Netflix（Spring Cloud便是基于他开源的微服务框架研发的），在现阶段（2018年）相对于作者的年代（2015年），技术上已经有了较大的变化。微服务的设计已经在很多公司大规模的推行及使用，变得更加成熟。作者所提出的前两点问题已经有了比较好的方案减少影响    </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/11/09/almond/microservices-version-control/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Design/">Design</a><a class="tag-link" href="/simple/tags/Version-Control/">Version Control</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/10/14/almond/hexo-theme-manage/">
+      简单、高效的管理hexo站点主题
+    </a>
+  </h2>
+  
+  <time>
+    10月 15, 2018
+  </time>
+  <section class="content">
+	  <p>如果您和我一样，喜欢更新至最新的主题，那么您也应该遇到和我一样的烦恼。每次更新新的主题时，总是要重新配置，而且随着自定义的内容增多，更新就成了负担。<br>因此，引入了Fork与Submodules来实现以下目标</p>
+<ol>
+<li>自动合并自定义内容与配置</li>
+<li>校验更新操作是否正常工作</li>
+</ol>
+<blockquote>
+<p>如果您不了解如何使用hexo搭建博客，您可以参考这篇博客：<a href="https://jiangtj.gitlab.io/articles/almond/gitlab-pages-for-hexo/">https://jiangtj.gitlab.io/articles/almond/gitlab-pages-for-hexo/</a></p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/10/14/almond/hexo-theme-manage/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Hexo/">Hexo</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/07/31/almond/f-open-feign/">
+      Spring Cloud 之 Feign （Finchley版）
+    </a>
+  </h2>
+  
+  <time>
+    8月 1, 2018
+  </time>
+  <section class="content">
+	  <p>Feign是轻量级、声明式的Http请求客户端，它吸收了来自的Retrofit JAXRS-2.0和WebSocket的灵感，为了使写Http请求变得更容易而诞生    </p>
+<p>Feign一开始作为Eureka的子项目，用于简化Http请求。但由于其不断完善，目前作为一个轻量级、声明式的Http请求客户端项目，独立维护。在Spring Cloud中，其引入了Feign，并提供了一系列默认的配置与Spring MVC注解的支持。因此，Feign一直被作为首先的Http请求客户端。   </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/07/31/almond/f-open-feign/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Spring-Cloud/">Spring Cloud</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/07/24/almond/f-eureka-server/">
+      Spring Cloud 之 Eureka （Finchley版）
+    </a>
+  </h2>
+  
+  <time>
+    7月 25, 2018
+  </time>
+  <section class="content">
+	  <p>在微服务架构中，服务发现是最重要的一环。Spring Cloud提供多个服务注册中心作为选择，如Eureka、Consul、Zookeeper等，当然最常用的是Eureka</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Eureka由Eureka Server与Eureka Client两部分组成<br>Eureka Server是高可用的（可同时作为客户端向其他注册中心注册）服务发现的注册中心，为每个客户端（Eureka Client）提供注册服务，并提供已注册服务信息<br>Eureka Client向服务注册中心注册，并提供断路、负载均衡等功能    </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/07/24/almond/f-eureka-server/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Spring-Cloud/">Spring Cloud</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/07/11/almond/spring-boot-relaxed-binding-2.0/">
+      Spring Boot Relaxed Binding 2.0
+    </a>
+  </h2>
+  
+  <time>
+    7月 12, 2018
+  </time>
+  <section class="content">
+	  <p>Spring Boot 中的配置绑定一直是其最主要的特性。而在Spring Boot 2.0中，该绑定方式做了大量的修改，并且借机制定一些新的规范，以减少过于宽松的绑定规则导致的一些问题</p>
+<blockquote>
+<p>您也可以通过官方的<a href="https://github.com/spring-projects/spring-boot/wiki/Relaxed-Binding-2.0" target="_blank" rel="noopener">Relaxed-Binding-2.0 wiki</a>了解详细</p>
+</blockquote>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/07/11/almond/spring-boot-relaxed-binding-2.0/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Spring-Boot/">Spring Boot</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/06/04/almond/aria2-info/">
+      Aria2 一个轻量级的命令行下载工具
+    </a>
+  </h2>
+  
+  <time>
+    6月 5, 2018
+  </time>
+  <section class="content">
+	  <p>aria2 是一个轻量级的、多源、跨平台的命令行下载实用工具。它支持HTTP/HTTPS、FTP、SFTP、BitTorrent和Metalink。<br>我们可以在GitHub上下载最新的<a href="https://github.com/aria2/aria2/releases" target="_blank" rel="noopener">稳定版</a>     </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/06/04/almond/aria2-info/">Read More</a>
+    </div>
+    
+    
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/05/30/almond/jweb-for-static-resource/">
+      JWeb 简单的方式部署静态资源
+    </a>
+  </h2>
+  
+  <time>
+    5月 31, 2018
+  </time>
+  <section class="content">
+	  <p>JWeb 是一个基于Spring Boot的简单服务。提供Shell脚本，以简单的方式部署以及运行静态资源</p>
+<h1 id="缘"><a href="#缘" class="headerlink" title="缘"></a>缘</h1><p>某天晚上睡不着，充电。突然脑抽了一下，node能做到命令行快速的运行静态资源，例如<a href="https://docsify.js.org/#/zh-cn/quickstart" target="_blank" rel="noopener">docsify-cli</a>，能通过<code>docsify serve your-static-dir</code>直接部署静态资源，于是我想的是，相似的功能，java也能实现的把    </p>
+<p>直接部署静态资源，在开发过程中是很有必要的，例如测试跨域问题，您必须另外起个服务。如果是下载web服务器，并将资源拖拽过去的方式，就有点麻烦咯</p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/05/30/almond/jweb-for-static-resource/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Java/">Java</a><a class="tag-link" href="/simple/tags/Shell/">Shell</a><a class="tag-link" href="/simple/tags/Web/">Web</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/05/27/almond/dart-vs-node/">
+      Dart与Node对比
+    </a>
+  </h2>
+  
+  <time>
+    5月 28, 2018
+  </time>
+  <section class="content">
+	  <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。<br>Node.js 的包管理器 npm，是全球最大的开源库生态系统。   </p>
+<h2 id="dart"><a href="#dart" class="headerlink" title="dart"></a>dart</h2><p>Dart是谷歌开发的计算机编程语言，后来被Ecma(ECMA-408)认定为标准。它被用于web、服务器、移动应用和物联网等领域的开发。它是宽松开源许可证（修改的BSD证书）下的开源软件。<br>Dart是面向对象的、类定义的、单继承的语言。它的语法类似C语言，可以转译为JavaScript，支持接口(interfaces)、混入(mixins)、抽象类(abstract classes)、具体化泛型(reified generics)、可选类型(optional typing)和sound type system。 </p>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/05/27/almond/dart-vs-node/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/Dart/">Dart</a><a class="tag-link" href="/simple/tags/Node/">Node</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+    <article class="post ">
+
+  
+  <h2 class="title">
+    <a href="/simple/2018/05/20/almond/tick-stack-for-server/">
+      TICK Stack 实践之监控服务器
+    </a>
+  </h2>
+  
+  <time>
+    5月 21, 2018
+  </time>
+  <section class="content">
+	  <p><a href="https://www.influxdata.com/time-series-platform/" target="_blank" rel="noopener">TICK Stack</a>是由一系列的服务组成的监控分析处理数据的解决方案，一般用于系统监控，或者收集处理与时间紧密相关的数据。    </p>
+<p>它包含了以下服务：   </p>
+<ul>
+<li>Telegraf 是一个插件驱动的代理服务，用于收集并提供系统数据（如CPU、内存等）</li>
+<li>InfluxDB 是一个时序数据库，为满足高负载的读写而开发的数据库</li>
+<li>Chronograf 通过图表可视化分析数据的服务</li>
+<li>Kapacitor 是数据处理服务，用于批处理数据以及必要时提醒用户等</li>
+</ul>
+
+    
+	  <div class="readmore">
+      <a href="/simple/2018/05/20/almond/tick-stack-for-server/">Read More</a>
+    </div>
+    
+    
+    
+	  <div class="tags">
+      <a class="tag-link" href="/simple/tags/TICK-Stack/">TICK Stack</a>
+	  </div>
+    
+
+  </section>
+</article>
+  
+</section>
+
+
+  <nav id="page-nav">
+    
+    
+    <a class="next" rel="next" href="/simple/page/2/">
+      <span class="text">Next</span>
+      <span class="icon icon-chevron-right"></span>
+    </a>
+    
+  </nav>
+  
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544710607071')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>
