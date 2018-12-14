@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Spring Boot使用GitLab CI自动部署 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="定义场景spring boot应用在手动部署过程中主要分为两步，打包编译与上传部署（也可能存在测试环境，但由于该项目目前只有我开发，并未写测试用例）。同样的在gitlab-ci文件中也定义相应的两步骤123stages:  - build  - deploy">
+<meta name="keywords" content="CI,Java,Shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot使用GitLab CI自动部署">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/04/22/almond/spring-boot-autodeploy-with-gitlab/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="定义场景spring boot应用在手动部署过程中主要分为两步，打包编译与上传部署（也可能存在测试环境，但由于该项目目前只有我开发，并未写测试用例）。同样的在gitlab-ci文件中也定义相应的两步骤123stages:  - build  - deploy">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-13T14:38:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot使用GitLab CI自动部署">
+<meta name="twitter:description" content="定义场景spring boot应用在手动部署过程中主要分为两步，打包编译与上传部署（也可能存在测试环境，但由于该项目目前只有我开发，并未写测试用例）。同样的在gitlab-ci文件中也定义相应的两步骤123stages:  - build  - deploy">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/spring-boot-autodeploy-with-gitlab" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/04/22/almond/spring-boot-autodeploy-with-gitlab/">
+    	Spring Boot使用GitLab CI自动部署
+    </a>
+  </h2>
+	<time>
+	  4月 23, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h1 id="定义场景"><a href="#定义场景" class="headerlink" title="定义场景"></a>定义场景</h1><p>spring boot应用在手动部署过程中主要分为两步，打包编译与上传部署（也可能存在测试环境，但由于该项目目前只有我开发，并未写测试用例）。同样的在gitlab-ci文件中也定义相应的两步骤<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">stages:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">build</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">deploy</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>使用GitLab公共CI服务为Spring Boot打包编译。image定义所使用的docker镜像，stage指定场景，script打包脚本（跳过测试阶段），artifacts定义需要归档的文件，only指定仅release分支打包（支持正则表达式）<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">release-build:</span></span><br><span class="line"><span class="attr">  image:</span> <span class="attr">maven:3.5.2-jdk-8</span></span><br><span class="line"><span class="attr">  stage:</span> <span class="string">build</span></span><br><span class="line"><span class="attr">  script:</span> <span class="string">"mvn package -B -Dmaven.test.skip=true"</span></span><br><span class="line"><span class="attr">  artifacts:</span></span><br><span class="line"><span class="attr">    paths:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">target/bill-server.jar</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">/^release-.*$/</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><p>配置文件的结构与编译的基本一直，这里使用ubuntu镜像，如果您使用的yam请替换相应的命令。如果您使用自己的CI Runner(shell)，建议密钥存放在自己的服务器上，手动配置实现对部署服务器的ssh访问<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">release-deploy:</span></span><br><span class="line"><span class="attr">  image:</span> <span class="string">ubuntu</span></span><br><span class="line"><span class="attr">  stage:</span> <span class="string">deploy</span></span><br><span class="line"><span class="attr">  script:</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">    -</span> <span class="string">'which ssh-agent || ( apt-get update -y &amp;&amp; apt-get install openssh-client git -y )'</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">eval</span> <span class="string">$(ssh-agent</span> <span class="bullet">-s)</span></span><br><span class="line">    <span class="comment">##</span></span><br><span class="line">    <span class="comment">## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store</span></span><br><span class="line">    <span class="comment">## We're using tr to fix line endings which makes ed25519 keys work</span></span><br><span class="line">    <span class="comment">## without extra base64 encoding.</span></span><br><span class="line">    <span class="comment">## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556</span></span><br><span class="line">    <span class="comment">##</span></span><br><span class="line">    <span class="comment"># Generate the private/public key pair using:</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#     ssh-keygen -f deploy_key -N ""</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># then set the $SSH_PRIVATE_KEY environment variable in the CI (Travis-CI,</span></span><br><span class="line">    <span class="comment"># GitLab-CI, ...) to the base64 encoded private key:</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#     cat deploy_key | base64 -w0</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># and add the public key `deploy_key.pub` into the target git repository (with</span></span><br><span class="line">    <span class="comment"># write permissions).</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">ssh-add</span> <span class="string">&lt;(echo</span> <span class="string">"$SSH_PRIVATE_KEY"</span> <span class="string">| base64 --decode)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    - mkdir -p ~/.ssh</span></span><br><span class="line"><span class="string">    - chmod 700 ~/.ssh</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    - ssh-keyscan 119.28.1.107 &gt;&gt; ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">    - chmod 644 ~/.ssh/known_hosts</span></span><br><span class="line"><span class="string">    - scp target/bill-server.jar ubuntu@119.28.1.107:bill</span></span><br><span class="line"><span class="string">    - ssh ubuntu@119.28.1.107 "cd bill; sh bill-start.sh"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">/^release-.*$/</span></span><br></pre></td></tr></table></figure></p>
+<p>其中shell脚本，与我的<a href="https://jiangtj.gitlab.io/articles/almond/spring-boot-autorun-with-gitlab/">另一篇博客</a>类似，稍做修改就行</p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a href="https://docs.gitlab.com/ee/ci/" target="_blank" rel="noopener">GitLab CI Document</a></li>
+<li><a href="https://gitlab.com/dream-room/bill-server/blob/master/.gitlab-ci.yml" target="_blank" rel="noopener">bill-server example</a></li>
+</ul>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Java/">Java</a><a class="tag-link" href="/simple/tags/Shell/">Shell</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544754478564')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

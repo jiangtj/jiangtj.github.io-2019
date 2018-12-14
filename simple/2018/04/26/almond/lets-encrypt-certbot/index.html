@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Certbot 为你的HTTP服务加一层SSL协议 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="谷歌Chrome安全产品经理艾米丽·谢克特（Emily Schechter）发表博文，证实当该公司在7月发布Chrome 68浏览器时，该浏览器将把所有未采用HTTPS（安全套接字层超文本传输协议）加密的网站都标记为“不安全”网站。     Chrome作为浏览器界的巨头，做出如此的决定，将极大的推进HTTPS的进程，我们自然也应该跟进，一同建立更安全的网络环境。但一般证书都是较为昂贵的，因此互联">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Certbot 为你的HTTP服务加一层SSL协议">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/04/26/almond/lets-encrypt-certbot/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="谷歌Chrome安全产品经理艾米丽·谢克特（Emily Schechter）发表博文，证实当该公司在7月发布Chrome 68浏览器时，该浏览器将把所有未采用HTTPS（安全套接字层超文本传输协议）加密的网站都标记为“不安全”网站。     Chrome作为浏览器界的巨头，做出如此的决定，将极大的推进HTTPS的进程，我们自然也应该跟进，一同建立更安全的网络环境。但一般证书都是较为昂贵的，因此互联">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-02T05:59:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Certbot 为你的HTTP服务加一层SSL协议">
+<meta name="twitter:description" content="谷歌Chrome安全产品经理艾米丽·谢克特（Emily Schechter）发表博文，证实当该公司在7月发布Chrome 68浏览器时，该浏览器将把所有未采用HTTPS（安全套接字层超文本传输协议）加密的网站都标记为“不安全”网站。     Chrome作为浏览器界的巨头，做出如此的决定，将极大的推进HTTPS的进程，我们自然也应该跟进，一同建立更安全的网络环境。但一般证书都是较为昂贵的，因此互联">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/lets-encrypt-certbot" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/04/26/almond/lets-encrypt-certbot/">
+    	Certbot 为你的HTTP服务加一层SSL协议
+    </a>
+  </h2>
+	<time>
+	  4月 27, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>谷歌Chrome安全产品经理艾米丽·谢克特（Emily Schechter）发表博文，证实当该公司在7月发布Chrome 68浏览器时，该浏览器将把所有未采用HTTPS（安全套接字层超文本传输协议）加密的网站都标记为“不安全”网站。    </p>
+<p>Chrome作为浏览器界的巨头，做出如此的决定，将极大的推进HTTPS的进程，我们自然也应该跟进，一同建立更安全的网络环境。但一般证书都是较为昂贵的，因此互联网安全研究小组Internet Security Research Group(ISRG)以及Linux基金会等，提供了公益的项目，用于加速HTTPS的发展    </p>
+<a id="more"></a>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><p>HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL。 它是一个URI scheme（抽象标识符体系），句法类同http:体系。用于安全的HTTP数据传输。https:URL表明它使用了HTTP，但HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。</p>
+<h2 id="Let’s-Encrypt"><a href="#Let’s-Encrypt" class="headerlink" title="Let’s Encrypt"></a>Let’s Encrypt</h2><p>Let’s Encrypt是一个公益的，免费的，自动化的和开源的证书颁发机构(CA)。是由互联网安全研究小组(ISRG)提供的服务。</p>
+<h2 id="Certbot"><a href="#Certbot" class="headerlink" title="Certbot"></a>Certbot</h2><p>Certbot是一个简单易用的工具，它能为您的Web服务器获取和部署SSL/TLS证书。Certbot是EFF和其他公司为Let’s Encrypt提供的客户端。在之前，它被称为“官方的Let’s Encrypt客户端”或“Let’s Encrypt 的Python客户端”。Certbot同样支持其他的支持ACME协议的证书颁发机构。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以在官网<a href="https://certbot.eff.org/" target="_blank" rel="noopener">https://certbot.eff.org/</a>上获取其安装文档，由于我服务端是Ubuntu16.04，同时以安装Nginx，所以选择了与此相应的安装文档。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install software-properties-common</span><br><span class="line">$ sudo add-apt-repository ppa:certbot/certbot</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install python-certbot-nginx</span><br></pre></td></tr></table></figure></p>
+<p>Ubuntu上一般通过apt-get包管理工具安装。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>Certbot 有支持多环境的Nginx插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo certbot --nginx</span><br></pre></td></tr></table></figure></p>
+<p>接下来是一些列问答式的配置，安装要求，或者自己的需求填写好<br>之后，我们可以发现网站已经可以通过https访问了</p>
+<h2 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h2><p>Certbot 的Nginx配置在<code>/etc/nginx/sites-enabled/default</code>中，我们可以找到配置的网站<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    root /var/www/html;</span><br><span class="line">    index index.html index.htm index.nginx-debian.html;</span><br><span class="line">    server_name x.j-time.cn; # managed by Certbot</span><br><span class="line"></span><br><span class="line">                </span><br><span class="line">    location / &#123;</span><br><span class="line">        # First attempt to serve request as file, then</span><br><span class="line">        # as directory, then fall back to displaying a 404.</span><br><span class="line">        try_files $uri $uri/ =404;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /bill-server/ &#123;</span><br><span class="line">         proxy_pass  http://localhost:8689/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ## ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这之中，我可以实现我们自己的代理，例如简单的转发到本地一个服务上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service nginx restart</span><br></pre></td></tr></table></figure></p>
+<p>重新Nginx服务</p>
+<h2 id="重新获取证书"><a href="#重新获取证书" class="headerlink" title="重新获取证书"></a>重新获取证书</h2><p>证书都是有有效期的，我们需要在有效期内重新获取更新证书，Let’s Encrypt的证书有效期为3个月。所以我们需要通过Certbot工具自动的更新证书<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo certbot renew --dry-run</span><br></pre></td></tr></table></figure></p>
+<h1 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h1><p>打开配置好的地址<a href="https://x.j-time.cn/" target="_blank" rel="noopener">https://x.j-time.cn/</a>，能正常的通过https访问了，同时谷歌、火狐等浏览器，也将此站点标记为了安全站点</p>
+<h1 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h1><p><a href="https://certbot.eff.org/docs/index.html" target="_blank" rel="noopener">Certbot Documentation</a></p>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/Web/">Web</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544754478564')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

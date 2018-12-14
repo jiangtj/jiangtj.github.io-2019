@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Spring Boot Relaxed Binding 2.0 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring Boot 中的配置绑定一直是其最主要的特性。而在Spring Boot 2.0中，该绑定方式做了大量的修改，并且借机制定一些新的规范，以减少过于宽松的绑定规则导致的一些问题  您也可以通过官方的Relaxed-Binding-2.0 wiki了解详细">
+<meta name="keywords" content="Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Boot Relaxed Binding 2.0">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2018/07/11/almond/spring-boot-relaxed-binding-2.0/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="Spring Boot 中的配置绑定一直是其最主要的特性。而在Spring Boot 2.0中，该绑定方式做了大量的修改，并且借机制定一些新的规范，以减少过于宽松的绑定规则导致的一些问题  您也可以通过官方的Relaxed-Binding-2.0 wiki了解详细">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jiangtj.gitlab.io/images/md/others/spring-test-map.png">
+<meta property="og:updated_time" content="2018-11-02T05:59:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Boot Relaxed Binding 2.0">
+<meta name="twitter:description" content="Spring Boot 中的配置绑定一直是其最主要的特性。而在Spring Boot 2.0中，该绑定方式做了大量的修改，并且借机制定一些新的规范，以减少过于宽松的绑定规则导致的一些问题  您也可以通过官方的Relaxed-Binding-2.0 wiki了解详细">
+<meta name="twitter:image" content="https://jiangtj.gitlab.io/images/md/others/spring-test-map.png">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/spring-boot-relaxed-binding-2.0" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2018/07/11/almond/spring-boot-relaxed-binding-2.0/">
+    	Spring Boot Relaxed Binding 2.0
+    </a>
+  </h2>
+	<time>
+	  7月 12, 2018
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>Spring Boot 中的配置绑定一直是其最主要的特性。而在Spring Boot 2.0中，该绑定方式做了大量的修改，并且借机制定一些新的规范，以减少过于宽松的绑定规则导致的一些问题</p>
+<blockquote>
+<p>您也可以通过官方的<a href="https://github.com/spring-projects/spring-boot/wiki/Relaxed-Binding-2.0" target="_blank" rel="noopener">Relaxed-Binding-2.0 wiki</a>了解详细</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="设置配置属性"><a href="#设置配置属性" class="headerlink" title="设置配置属性"></a>设置配置属性</h1><h2 id="简单的类型"><a href="#简单的类型" class="headerlink" title="简单的类型"></a>简单的类型</h2><p>配置文件中的简单类型，都会被移除特殊字符并转为小写后，进行绑定。例如下面的几个配置都等价于<code>spring.jpa.databaseplatform=mysql</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.jpa.database-platform=mysql</span><br><span class="line">spring.jpa.databasePlatform=mysql</span><br><span class="line">spring.JPA.database_platform=mysql</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>当然，推荐的是kebab-case命名，也是上面例子中的<code>spring.jpa.database-platform=mysql</code></p>
+</blockquote>
+<h2 id="List类型"><a href="#List类型" class="headerlink" title="List类型"></a>List类型</h2><p>List类型的属性，在配置文件中需要使用<code>[ ]</code>标记符:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.my-example.url[0]=http://example.com</span><br><span class="line">spring.my-example.url[1]=http://spring.io</span><br></pre></td></tr></table></figure></p>
+<p>或者yml的标准写法<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  my-example:</span></span><br><span class="line"><span class="attr">    url:</span></span><br><span class="line"><span class="attr">      - http:</span><span class="string">//example.com</span></span><br><span class="line"><span class="attr">      - http:</span><span class="string">//spring.io</span></span><br></pre></td></tr></table></figure></p>
+<p>同时，还支持使用逗号分割成数组，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.my-example.urls=http://example.com,http://spring.io</span><br></pre></td></tr></table></figure></p>
+<p>注意：在properties，如果遗漏中间的索引，会导致无法绑定异常，下面是不被允许的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo[0] = a</span><br><span class="line">foo[2] = b</span><br></pre></td></tr></table></figure></p>
+<h2 id="Map-类型"><a href="#Map-类型" class="headerlink" title="Map 类型"></a>Map 类型</h2><p>Map类型标准格式很简单<code>my-example.key=value</code>，yml类似的，但当遇到特殊字符时，就需要特别处理，但官方文档上讲的，不是很清楚，所以写了几个例子做实验   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jwt.test.xx=1</span><br><span class="line">jwt.test.xx-xx=2</span><br><span class="line">jwt.test.XX-xx=3</span><br><span class="line">jwt.test.[ww-ww]=4</span><br><span class="line">jwt.test.&apos;[uuu/w1]&apos;=5</span><br><span class="line">jwt.test.[uuu/w2]=6</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jwt:</span></span><br><span class="line"><span class="attr">  ymltest:</span></span><br><span class="line"><span class="attr">    foo:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">    ppp-vvv:</span> <span class="number">2</span></span><br><span class="line">    <span class="string">[scfds-tgro]:</span> <span class="number">3</span></span><br><span class="line">    <span class="string">'[csf-te]'</span><span class="string">:</span> <span class="number">4</span></span><br><span class="line">    <span class="string">'[csf/e]'</span><span class="string">:</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>结果如下图所示：<br><img src="/images/md/others/spring-test-map.png" alt="">    </p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>在环境变量中，使用<code>_</code>代替<code>.</code>或者<code>[]</code>，如果<code>_</code>包围的是一数字，就替换为<code>[]</code>，其余情况为<code>.</code>，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MY_FOO_1_ = my.foo[1]</span><br><span class="line">MY_FOO_1_BAR = my.foo[1].bar</span><br><span class="line">MY_FOO_1_2_ = my.foo[1][2]</span><br></pre></td></tr></table></figure></p>
+<h1 id="读取配置属性"><a href="#读取配置属性" class="headerlink" title="读取配置属性"></a>读取配置属性</h1><p>如果，你需要从环境中读出属性值到你的app中，你需要使用与配置文件一样规则的名称</p>
+<ul>
+<li>相同的名称</li>
+<li>必须是 (a-z,0-9)字母</li>
+<li>必须是 小写</li>
+<li>唯一允许的特殊字符是<code>[]</code>，用于表示list的索引</li>
+<li>用连接符<code>-</code>分割单词</li>
+<li>不能以数字开头   </li>
+</ul>
+<p>下面是一个从配置文件中读出属性的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.environment.containsProperty(<span class="string">"spring.jpa.database-platform"</span>)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>@Value 也需要遵守一样的规则</p>
+</blockquote>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/Spring-Boot/">Spring Boot</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544754478564')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

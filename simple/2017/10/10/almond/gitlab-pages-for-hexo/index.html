@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>GitLab Pages 搭建Hexo教程 | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。     所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态">
+<meta name="keywords" content="Hexo,CI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitLab Pages 搭建Hexo教程">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2017/10/10/almond/gitlab-pages-for-hexo/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。     所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://jiangtj.github.io/assets/img/others/ci-1.jpg">
+<meta property="og:image" content="https://jiangtj.github.io/assets/img/others/ci-2.jpg">
+<meta property="og:updated_time" content="2018-11-12T10:54:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitLab Pages 搭建Hexo教程">
+<meta name="twitter:description" content="大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。     所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态">
+<meta name="twitter:image" content="https://jiangtj.github.io/assets/img/others/ci-1.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/gitlab-pages-for-hexo" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2017/10/10/almond/gitlab-pages-for-hexo/">
+    	GitLab Pages 搭建Hexo教程
+    </a>
+  </h2>
+	<time>
+	  10月 11, 2017
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>大部分情况下，都是github pages与hexo组合搭建静态博客。但不可否认的是，这样存在一些问题。比如，每次文章写完都需要要编译，才能上传，如果我仅仅想写个博客，这样的操作显得繁琐。又比如，你拥有多台电脑的情况，你需要在每台电脑上都配置一样的环境。    </p>
+<p>所以通过持续集成CI/CD的方式，让编译自动化，是一种很不错的解决方案。这里将介绍gitlab-ci来简化环境的搭建与编译过程。当然静态资源将托管在gitlab-pages上。   </p>
+<blockquote>
+<p>There is also a tutorial in English</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="中文教程"><a href="#中文教程" class="headerlink" title="中文教程"></a>中文教程</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><ol>
+<li>点击打开<a href="https://gitlab.com/groups/pages" target="_blank" rel="noopener">gitlab pages例子页面</a></li>
+<li>fork其中的hexo项目到自己的账户（如果没有需要创建一个新的gitlab账户）</li>
+<li>删除fork关系（点击项目左侧的settings-&gt;General，然后展开Advanced settings，删除fork关系）</li>
+<li>可选：修改项目信息，如Project name、Project description、Path等。<em>这里建议Path和Project name一同修改。</em>gitlab pages地址规则与github是一致的  </li>
+<li>可选：<strong>建议修改<code>.gitlab-ci.yml</code>中node版本为最新的稳定版</strong></li>
+<li>修改任意一文件，如readme.md或者source/_posts下的文章</li>
+</ol>
+<p>当你完成这些步骤，你可以点击右侧的CI/CD，可以看到如下画面：  </p>
+<p><img src="https://jiangtj.github.io/assets/img/others/ci-1.jpg" alt="">  </p>
+<p>当然你看到的可能是pending或running，这时请耐心等待。当显示为passed时，在浏览器中输入托管地址<a href="https://your-name.gitlab.io/projext-name，能访问，就意味着搭建成功咯" target="_blank" rel="noopener">https://your-name.gitlab.io/projext-name，能访问，就意味着搭建成功咯</a>    </p>
+<h3 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h3><p>这个项目结构是标准的hexo的项目，除了多个一个<code>.gitlab-ci.yml</code>，如下图   </p>
+<p><img src="https://jiangtj.github.io/assets/img/others/ci-2.jpg" alt="">  </p>
+<p>我们仅需关心script部分即可，而这部分其实是标准的hexo命令。    </p>
+<p>如果你想使用next主题（最受欢迎的hexo主题），<a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">http://theme-next.iissnan.com</a>官网的网站上已有详细的教程    </p>
+<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><h3 id="Get-Started"><a href="#Get-Started" class="headerlink" title="Get Started"></a>Get Started</h3><ol>
+<li>Click <a href="https://gitlab.com/groups/pages" target="_blank" rel="noopener">example projects for gitlab pages</a></li>
+<li>Fork the project of hexo to your account(If you do not have any gitlab account, you can create a new)</li>
+<li>Remove fork relationship(Choose settings-&gt;General from the list on the left.And expand Advanced settings to remove fork relationship)</li>
+<li>Optional: modify project info，such as Project name, Project description, Path etc. <em>Here’s a suggestion about that path and Project name modify together.</em> your website will be available at <a href="https://username.gitlab.io/projectname" target="_blank" rel="noopener">https://username.gitlab.io/projectname</a>, it is familiar with gitlab pages.</li>
+<li>Optional: <strong>suggested modify the node’s version from <code>.gitlab-ci.yml</code> to last LTE version</strong></li>
+<li>Modify any file, such as readme.md or the article under source/_posts</li>
+<li>Choose CI/CD, waiting job completion</li>
+<li>Click <a href="https://your-name.gitlab.io/projext-name" target="_blank" rel="noopener">https://your-name.gitlab.io/projext-name</a></li>
+</ol>
+<h3 id="Advanced"><a href="#Advanced" class="headerlink" title="Advanced"></a>Advanced</h3><ul>
+<li>you can modify script in <code>.gitlab-ci.yml</code>.</li>
+<li>you can change the theme to next, which is most popular theme of hexo, by a official tutorial <a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">http://theme-next.iissnan.com</a></li>
+</ul>
+<h2 id="Updated"><a href="#Updated" class="headerlink" title="Updated"></a>Updated</h2><h3 id="Command-Lines"><a href="#Command-Lines" class="headerlink" title="Command Lines"></a>Command Lines</h3><p>Use command lines to init a blog with gilab page, written in 2018.9.19</p>
+<h4 id="Init-hexo-project"><a href="#Init-hexo-project" class="headerlink" title="Init hexo project"></a>Init hexo project</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init your-blog-dir</span><br><span class="line"><span class="built_in">cd</span> your-blog-dir</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>Hexo is running at <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a>, you can test it.</p>
+<h4 id="Git-remote"><a href="#Git-remote" class="headerlink" title="Git remote"></a>Git remote</h4><p>Assert your project remote url is <a href="https://gitlab.com/your-gitlab-name/project-name" target="_blank" rel="noopener">https://gitlab.com/your-gitlab-name/project-name</a>.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin git@gitlab.com:&lt;your-gitlab-name&gt;/&lt;project-name&gt;.git</span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"Initial commit"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
+<h4 id="Add-CI-config"><a href="#Add-CI-config" class="headerlink" title="Add CI config"></a>Add CI config</h4><p>Please rename <code>&lt;*-name&gt;</code> to real name, such as <code>sed -ri &#39;s/.*(url:.*)/url: https:\/\/jiangtj.gitlab.io/g&#39; _config.yml</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O .gitlab-ci.yml https://gitlab.com/JiangTJ/hexo/raw/master/.gitlab-ci.yml?inline=<span class="literal">false</span></span><br><span class="line">sed -ri <span class="string">'s/.*(url:.*)/url: https:\/\/&lt;your-gitlab-name&gt;.gitlab.io/g'</span> _config.yml</span><br></pre></td></tr></table></figure></p>
+<p>If project-name is not your-gitlab-name.gitlab.io, update <code>root</code> var.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -ri <span class="string">'s/.*(root:.*)/root: \/&lt;project-name&gt;\//g'</span> _config.yml</span><br></pre></td></tr></table></figure></p>
+<p>Push to remote<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">"CI"</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
+<p>Wait pipeline finish running, your hexo blog is running at <a href="https://your-gitlab-name.gitlab.io/project-name" target="_blank" rel="noopener">https://your-gitlab-name.gitlab.io/project-name</a>.</p>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/CI/">CI</a><a class="tag-link" href="/simple/tags/Hexo/">Hexo</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544754478564')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>

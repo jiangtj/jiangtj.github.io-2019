@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head><link rel=manifest href=/manifest.json><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>Java动态代理小例子. | Kurome</title>
+  <meta name="description" content="A minimal hexo theme.">
+  <meta name="keywords" content="">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="例子1，先创建teacher接口123public interface Teacher &amp;#123;	void manageWork(String s);&amp;#125; 2,创建teacher实现类123456789public class TeacherA implements Teacher &amp;#123;	@Override	public void manageWork(String s) &amp;#">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java动态代理小例子.">
+<meta property="og:url" content="https://jiangtj.gitlab.io/2016/07/17/almond/java-proxy-example/index.html">
+<meta property="og:site_name" content="Kurome">
+<meta property="og:description" content="例子1，先创建teacher接口123public interface Teacher &amp;#123;	void manageWork(String s);&amp;#125; 2,创建teacher实现类123456789public class TeacherA implements Teacher &amp;#123;	@Override	public void manageWork(String s) &amp;#">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-02T05:59:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java动态代理小例子.">
+<meta name="twitter:description" content="例子1，先创建teacher接口123public interface Teacher &amp;#123;	void manageWork(String s);&amp;#125; 2,创建teacher实现类123456789public class TeacherA implements Teacher &amp;#123;	@Override	public void manageWork(String s) &amp;#">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <script type="text/javascript">
+    var HexoConfig = {
+      root: '/simple/',
+      search: {
+        enabled: 'true'
+      }
+    };
+  </script>
+
+	<!-- <script src="https://use.typekit.net/eyf3hir.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script> -->
+  <link rel="stylesheet" href="/simple/style.css">
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+  
+
+</head>
+</html>
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+  <script>setLoadingBarProgress(20)</script>
+  
+  <div id="site-wrapper">
+    
+    <header id="header">
+	<div id="header-wrapper" class="clearfix">
+		<a id="logo" href="/simple/">
+		  
+			  <span id="site-title">Kurome</span>
+			
+			<span id="site-desc">
+			  若白驹过隙，忽然而已
+      </span>
+		</a>
+		<button id="site-nav-switch">
+	    <span class="icon icon-menu"></span>
+	  </button>
+	</div>
+	<aside id="site-menu">
+  	<nav>
+  		
+        <a href="/simple/" class="nav-home nav">
+          Home
+        </a>
+      
+        <a href="/simple/about" class="nav-about nav">
+          About
+        </a>
+      
+        <a href="/simple/archives" class="nav-archives nav">
+          Archives
+        </a>
+      
+    </nav>
+	</aside>
+</header>
+    <script>setLoadingBarProgress(40);</script>
+    
+    <main id="main" role="main">
+      <article id="post-almond/java-proxy-example" class="post article white-box article-type-post" itemscope="" itemprop="blogPost">
+	<h2 class="title">
+  	<a href="/simple/2016/07/17/almond/java-proxy-example/">
+    	Java动态代理小例子.
+    </a>
+  </h2>
+	<time>
+	  7月 18, 2016
+	</time>
+	<section class="content">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>1，先创建teacher接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">manageWork</span><span class="params">(String s)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2,创建teacher实现类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherA</span> <span class="keyword">implements</span> <span class="title">Teacher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">manageWork</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">"开始布置作业："</span>+s);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>3,创建teacher代理类,java 的动态代理就是通过Proxy.newProxyInstance这个静态方法生成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> Object teacher;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTeacher</span><span class="params">(Class&lt;?&gt; cls)</span></span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			teacher =cls.newInstance();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Teacher <span class="title">getTeacher</span><span class="params">(Class&lt;?&gt; cls)</span></span>&#123;</span><br><span class="line">		TeacherProxy proxy=<span class="keyword">new</span> TeacherProxy();</span><br><span class="line">		proxy.setTeacher(cls);</span><br><span class="line">		<span class="keyword">return</span> (Teacher) Proxy.newProxyInstance(cls.getClassLoader(), cls.getInterfaces(), proxy);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span></span></span><br><span class="line"><span class="function">			<span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="comment">//System.out.println("代理类名字："+proxy.getClass().getName());</span></span><br><span class="line">		System.out.println(teacher.getClass().getSimpleName()+<span class="string">"的课代表通知老师"</span>);</span><br><span class="line">		Object o=method.invoke(teacher, args);</span><br><span class="line">		System.out.println(teacher.getClass().getSimpleName()+<span class="string">"的任务完成"</span>);</span><br><span class="line">		<span class="keyword">return</span> o;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来我们在main中写一下代码运行,其中student只是普通的类，不在这里写出来了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	Teacher teacherProxyA=TeacherProxy.getTeacher(TeacherA.class);</span><br><span class="line">	Teacher teacherProxyB=TeacherProxy.getTeacher(TeacherB.class);</span><br><span class="line">	teacherProxyA.manageWork(<span class="string">"语文作业"</span>);</span><br><span class="line">	teacherProxyB.manageWork(<span class="string">"数学作业"</span>);</span><br><span class="line">	<span class="keyword">new</span> StudentA().doWork();</span><br><span class="line">	<span class="keyword">new</span> StudentB().doWork();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行后能看到下面的结果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">TeacherA的课代表通知老师</span><br><span class="line">TeacherA开始布置作业：语文作业</span><br><span class="line">TeacherA的任务完成</span><br><span class="line">TeacherB的课代表通知老师</span><br><span class="line">TeacherB开始布置作业：数学作业</span><br><span class="line">TeacherB的任务完成</span><br><span class="line">StudentA开始做作业</span><br><span class="line">StudentB开始做作业</span><br></pre></td></tr></table></figure></p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>如上面结果所示，teacherProxyA是由Proxy产生的动态代理类，它拥有接口所对应的方法，调用这个方法其实就是调用invoke方法。<br>在invoke中，调用的是他所代理对象的方法。<br>所以说，动态代理很强大，他可以在代理过程中执行拦截或者记录日志，spring的aop核心便是这个。<br>除此之外，不得不提一下retrofit框架，这是面向android的RESTful网络请求框架，他的核心也是动态代理，不过，对于所有的请求都提供一样的实现，而所有的参数都通过flied值与注解来得到，然后通过okhttp提交并返回call对象。这种实现很精彩。</p>
+
+  	</div>
+
+	  <div class="article-tags tags">
+		  
+        <a class="tag-link" href="/simple/tags/设计模式/">设计模式</a>
+      
+	  </div>
+	</section>
+</article>
+
+
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </main>
+    
+    <footer id="footer" class="clearfix">
+  
+  
+	<div class="search">
+	  <form name="searchform" id="searchform" class="u-search-form">
+	    <input type="text" id="searchinput" class="u-search-input" placeholder="Looking for something?">
+	    <button type="submit" id="u-search-btn-submit" class="u-search-btn-submit">
+	      <span class="icon icon-search"></span>
+	    </button>
+	  </form>
+	</div>
+	
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="mailto:jiang.taojie@foxmail.com" class="social email" target="_blank" rel="external">
+          <span class="icon icon-email"></span>
+        </a>
+      
+        <a href="https://github.com/jiangtj" class="social github" target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <span class="codename">Typescript</span> designed by <a href="http://rakugaki.me/" target="_blank">Art Chen</a>.</div>
+  <div>&copy; <a href="/">Kurome</a></div>
+  
+</footer>
+
+
+    <script>setLoadingBarProgress(80);</script>
+    
+  </div>
+
+  
+
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery.min.js"><\/script>')</script>
+
+<script src="/simple/js/jquery.fitvids.js"></script>
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "google";
+</script>
+<script src="/simple/js/search.js"></script>
+<script src="/simple/js/app.js"></script>
+
+
+  <script>setLoadingBarProgress(100);</script>
+  
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1544754478564')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>
